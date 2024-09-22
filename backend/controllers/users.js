@@ -48,24 +48,24 @@ const deleteUserById = asyncHandler(async (req, res) => {
 });
 
 // Get Tweets by User ID
-const getTweetByUserId = asyncHandler(async (req, res) => {
-  const id = req.params.id;
-  // 1st Way
-  const tweets = await Tweet.find({
-    byUser: id,
-  });
-  return res.json({ tweets });
+// const getTweetByUserId = asyncHandler(async (req, res) => {
+//   const id = req.params.id;
+//   // 1st Way
+//   const tweets = await Tweet.find({
+//     byUser: id,
+//   });
+//   return res.json({ tweets });
 
-  // 2st Way
-  // const tweets = await User.findById(id).select('tweets').populate('tweets')
-  // return res.json({ tweets})
-});
+//   // 2st Way
+//   // const tweets = await User.findById(id).select('tweets').populate('tweets')
+//   // return res.json({ tweets})
+// });
 
 module.exports = {
   getUser,
   getUsers,
   deleteUserById,
   createUser,
-  getTweetByUserId,
+  // getTweetByUserId,
   updateUserById,
 };

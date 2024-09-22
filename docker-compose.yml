@@ -1,14 +1,19 @@
-# docker-compose.yml
-version: '3.9'
-
+version: "3.8"
 services:
-  api:
+  frontend:
     build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: cpd-express
+      context: ./frontend
     ports:
-      - '4000:4000'
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
     environment:
       - MONGO_HOST=mongo
       - MONGO_PORT=27017
@@ -20,9 +25,8 @@ services:
     image: mongo:latest
     container_name: mongo
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
       - mongodbdata:/data/db
-
 volumes:
   mongodbdata:

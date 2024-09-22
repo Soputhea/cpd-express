@@ -28,7 +28,7 @@ const createUserDetail = asyncHandler(async (req, res) => {
 const getAllUserDetails = asyncHandler(async (req, res) => {
   // const results = await UserDetail.find().populate("user_id")
   const results = await UserDetail.find();
-  return res.json({ results });
+  return res.json(results);
 });
 
 // Get UserDetail by ID

@@ -35,10 +35,10 @@ const generateFakeUser = async () => {
 const generateFakeUserDetail = async (userId) => {
   const userDetail = new UserDetail({
     user_id: userId,
-    payroll_id: faker.string.uuid(),
+    payroll_id: faker.finance.creditCardNumber(),
     name_kh: faker.person.fullName(),
     name_en: faker.person.fullName(),
-    gender: faker.helpers.arrayElement(['Male', 'Female']),
+    gender: faker.helpers.arrayElement(['male', 'female']),
     dob: faker.date.past({ years: 40 }),
     date_of_starting_work: faker.date.past({ years: 10 }),
     location_kh: faker.location.city(),

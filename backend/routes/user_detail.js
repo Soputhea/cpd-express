@@ -16,8 +16,7 @@ UserDetailRoute.post("/", createUserDetail);
 UserDetailRoute.put("/:id", updateUserDetail);
 UserDetailRoute.get("/:id", getUserDetailByID);
 UserDetailRoute.get("/userId/:userId", getUserDetailsByUserId);
-UserDetailRoute.delete(
-  "/:id",
+UserDetailRoute.delete("/:id",
   // authorize("delete_own_record"),
   // resourceControl("user"),
   deleteUserDetailById
