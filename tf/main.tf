@@ -27,7 +27,7 @@ resource "digitalocean_droplet" "project_2" {
   image  = "ubuntu-22-04-x64"
   name   = "project-2"
   region = "sgp1"
-  size   = "s-1vcpu-1gb"
+  size   = "s-1vcpu-2gb"
   ssh_keys = [digitalocean_ssh_key.project_2_key.fingerprint]
 }
 

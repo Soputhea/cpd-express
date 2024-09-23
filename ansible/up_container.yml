@@ -4,26 +4,42 @@
   tasks:
     - name: Clone repo
       ansible.builtin.git:
-        repo: https://github.com/tfd-ed/tw-clone-api.git
-        dest: "{{ ansible_env.HOME }}/tw-clone-api"
+        repo: https://github.com/Soputhea/cpd-express.git
+        dest: "{{ ansible_env.HOME }}/cpd-express"
         # single_branch: yes
         version: main
-    - name: Copy environment file
+        
+    - name: Copy backend environment file
       copy:
-        src: "{{ ansible_env.HOME }}/tw-clone-api/.template.env"
-        dest: "{{ ansible_env.HOME }}/tw-clone-api/.env"
+        src: "{{ ansible_env.HOME }}/cpd-express/backend/.template.env"
+        dest: "{{ ansible_env.HOME }}/cpd-express/backend/.env"
         remote_src: yes
+
+    - name: Copy frontend environment file
+      copy:
+        src: "{{ ansible_env.HOME }}/cpd-express/frontend/.template.env"
+        dest: "{{ ansible_env.HOME }}/cpd-express/frontend/.env"
+        remote_src: yes
+
     - name: Start Docker Compose
       ansible.builtin.command: docker compose up -d
       args:
-        chdir: "{{ ansible_env.HOME }}/tw-clone-api"
+        chdir: "{{ ansible_env.HOME }}/cpd-express"
 
     - name: Enable firewall
       ufw:
         state: enabled
 
-    - name: Allow port 4000 through the firewall
+    - name: Allow ports 4000 and 3000 through the firewall
       ufw:
         rule: allow
-        port: 4000
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - 4000
+        - 3000
+    - name: Allow MongoDB port 27017 through the firewall
+      ufw:
+        rule: allow
+        port: 27017
         proto: tcp
