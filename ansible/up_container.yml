@@ -8,16 +8,16 @@
         dest: "{{ ansible_env.HOME }}/cpd-express"
         # single_branch: yes
         version: main
-        
+
     - name: Copy backend environment file
       copy:
-        src: "{{ ansible_env.HOME }}/cpd-express/backend/.template.env"
+        src: "{{ ansible_env.HOME }}/cpd-express/backend/.env.example"
         dest: "{{ ansible_env.HOME }}/cpd-express/backend/.env"
         remote_src: yes
 
     - name: Copy frontend environment file
       copy:
-        src: "{{ ansible_env.HOME }}/cpd-express/frontend/.template.env"
+        src: "{{ ansible_env.HOME }}/cpd-express/frontend/.env.example"
         dest: "{{ ansible_env.HOME }}/cpd-express/frontend/.env"
         remote_src: yes
 
@@ -26,18 +26,27 @@
       args:
         chdir: "{{ ansible_env.HOME }}/cpd-express"
 
+    - name: Allow SSH through the firewall (port 22)
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+
     - name: Enable firewall
       ufw:
         state: enabled
 
-    - name: Allow ports 4000 and 3000 through the firewall
+    - name: Allow port 4000 through the firewall
       ufw:
         rule: allow
-        port: "{{ item }}"
+        port: 4000
         proto: tcp
-      loop:
-        - 4000
-        - 3000
+    - name: Allow port 3000 through the firewall
+      ufw:
+        rule: allow
+        port: 3000
+        proto: tcp
+
     - name: Allow MongoDB port 27017 through the firewall
       ufw:
         rule: allow

@@ -69,9 +69,9 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to your Express backend
       '/api': {
-        target: process.env.VUE_APP_ENV_SERVER,
-        // target: 'http://localhost:4000', // Express server
-        // changeOrigin: true,
+        // target: process.env.VUE_APP_ENV_SERVER,
+        target: 'http://0.0.0.0:4000', // Express server
+        changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ''), // Optional: remove `/api` from the request
       },
     },
