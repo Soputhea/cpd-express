@@ -1,0 +1,54 @@
+- name: Up Containers
+  hosts: project-2-vm
+  become: yes
+  tasks:
+    - name: Clone repo
+      ansible.builtin.git:
+        repo: https://github.com/Soputhea/cpd-express.git
+        dest: "{{ ansible_env.HOME }}/cpd-express"
+        # single_branch: yes
+        version: main
+
+    - name: Copy backend environment file
+      copy:
+        src: "{{ ansible_env.HOME }}/cpd-express/backend/.env.example"
+        dest: "{{ ansible_env.HOME }}/cpd-express/backend/.env"
+        remote_src: yes
+
+    - name: Copy frontend environment file
+      copy:
+        src: "{{ ansible_env.HOME }}/cpd-express/frontend/.env.example"
+        dest: "{{ ansible_env.HOME }}/cpd-express/frontend/.env"
+        remote_src: yes
+
+    - name: Start Docker Compose
+      ansible.builtin.command: docker compose up -d
+      args:
+        chdir: "{{ ansible_env.HOME }}/cpd-express"
+
+    - name: Allow SSH through the firewall (port 22)
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+
+    - name: Enable firewall
+      ufw:
+        state: enabled
+
+    - name: Allow port 4000 through the firewall
+      ufw:
+        rule: allow
+        port: 4000
+        proto: tcp
+    - name: Allow port 3000 through the firewall
+      ufw:
+        rule: allow
+        port: 3000
+        proto: tcp
+
+    - name: Allow MongoDB port 27017 through the firewall
+      ufw:
+        rule: allow
+        port: 27017
+        proto: tcp

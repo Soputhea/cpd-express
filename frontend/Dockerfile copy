@@ -14,13 +14,13 @@ RUN npm install
 COPY . .
 
 # Build the app for production
-# RUN npm run build
+RUN npm run build
 
-# # Install serve to serve the app.
-# RUN npm install -g serve
+# Install serve to serve the app.
+RUN npm install -g serve
 
 # Expose the app port.
 EXPOSE 3000
 
 # Start the application.
-CMD ["dev", "run", "serve", "-s", "dist"]
+CMD ["serve", "-s", "dist"]
