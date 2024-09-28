@@ -7,8 +7,8 @@ services:
       - "3000:3000"
     networks:
       - app-network
-    environment:
-      - NODE_ENV=development # or production based on your environment
+    # environment:
+    #   - NODE_ENV=development # or production based on your environment
     depends_on:
       - backend
 
@@ -22,7 +22,7 @@ services:
       - MONGO_HOST=mongo
       - MONGO_PORT=27017
       - MONGO_DB_NAME=cpd-db
-      - NODE_ENV=production
+      # - NODE_ENV=production
     networks:
       - app-network
     depends_on:
