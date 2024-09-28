@@ -135,7 +135,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { useDate } from 'vuetify'
 import { VDateInput } from 'vuetify/labs/VDateInput'
-const baseUrl = import.meta.env.VITE_API_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 
 const date = useDate()
