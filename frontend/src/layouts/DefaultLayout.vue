@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 
-console.log('API URL:', process.env.VUE_APP_API_URL);
+// console.log('API URL:', process.env.VUE_APP_API_URL);
 import router from '@/router';
 import { ref } from 'vue';
 

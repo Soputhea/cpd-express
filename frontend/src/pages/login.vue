@@ -27,7 +27,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-const baseUrl = `${import.meta.env.BASE_URL}`;
+const baseUrl = `${import.meta.env.VITE_API_URL}`;
 
 const router = useRouter();
 const valid = ref(false);
@@ -69,5 +69,6 @@ const login = async () => {
   }
 };
 
+console.log(baseUrl)
 
 </script>

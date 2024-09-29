@@ -36,16 +36,7 @@ dbConnect().catch((err) => {
 });
 
 // Allow requests from specific origin (your frontend's URL)
-app.use(cors(
-  {
-    origin: "http://localhost:3000", // Allow only this origin
-  }
-));
-
-// app.use(express.static(path.join(__dirname, '/frontend/dist')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/frontend/dist/index.html'));
-// });
+app.use(cors());
 
 app.use(parser.json());
 app.use("/api/auth", authRoute);
