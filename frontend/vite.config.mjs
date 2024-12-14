@@ -16,7 +16,11 @@ export default defineConfig({
   // envDir: '../', // Custom path for .env files
   plugins: [
     VueRouter(),
-    Layouts(),
+    Layouts({
+      target: 'src/layouts',  // The directory where your layout components are stored
+      defaultLayout: 'default',    // Optional: sets the default layout
+      skipTopLevelRouteLayout: true,
+      }),
     Vue({
       template: { transformAssetUrls }
     }),

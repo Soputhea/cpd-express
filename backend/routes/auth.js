@@ -8,8 +8,8 @@ const authRoute = express.Router()
 
 authRoute.post('/login' , loginSchema, handleValidation, loginUser)
 authRoute.post('/signup', createUserShema, handleValidation, signupUser )
-authRoute.get('/show-google-oauth', showGoogleOAuthScreen)
-authRoute.get('/google-callback', handleGoogleLogin)
+// authRoute.get('/show-google-oauth', showGoogleOAuthScreen)
+// authRoute.get('/google-callback', handleGoogleLogin)
 
 
 module.exports = authRoute

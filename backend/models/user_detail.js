@@ -19,7 +19,7 @@ const userDetailSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      // enum: ["male", "female"],
       required: true,
     },
     dob: {
@@ -36,7 +36,7 @@ const userDetailSchema = new mongoose.Schema(
     },
     location_type: {
       type: String,
-      enum: ["Urban", "Rural"],
+      // enum: ["Urban", "Rural"],
       required: true,
     },
     province: {

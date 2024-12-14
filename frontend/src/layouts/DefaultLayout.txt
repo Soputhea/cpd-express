@@ -2,13 +2,15 @@
   <v-app>
     <v-navigation-drawer location="left" permanent app v-model="drawer" >
       <template v-slot:prepend>
-        <v-list-item lines="two" prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg" subtitle="Logged in"
-          title="Jane Smith"></v-list-item>
+        <v-list-item lines="two" prepend-avatar="https://atqnp.github.io/assets/img/avataaars.png"
+          :subtitle="userEmail"
+          :title="userName" >
+        </v-list-item>
       </template>
       <v-divider></v-divider>
       <v-list density="compact" nav >
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="User Detail" value="account" to="/createuser"></v-list-item>
+        <!-- <v-list-item prepend-icon="mdi-account" title="User Detail" value="account" to="/createuser"></v-list-item> -->
         <v-list-item prepend-icon="mdi-account-group-outline" title="List Users" value="users"
           to="/users"></v-list-item>
       </v-list>
@@ -29,23 +31,30 @@
 </template>
 
 <script setup lang="ts">
-
-// console.log('API URL:', process.env.VUE_APP_API_URL);
+import { ref, onMounted } from 'vue';
 import router from '@/router';
-import { ref } from 'vue';
 
 const drawer = ref(true);
 const valid = ref(false);
-const formData = ref({
-  email: '',
-  password: '',
+
+// User information
+const userName = ref('');
+const userEmail = ref('');
+
+// Load user data from localStorage on component mount
+onMounted(() => {
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+    userName.value = user.firstname + ' ' + user.lastname || 'No name available';
+    userEmail.value = user.email || 'No Email Provided';
+  }
 });
+
 
 const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  valid.value = false;
-  formData.value = { email: '', password: '' };
   router.push({ path: '/login' });
   // Clear any existing error messages
 }

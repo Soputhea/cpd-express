@@ -26,6 +26,13 @@
       args:
         chdir: "{{ ansible_env.HOME }}/cpd-express"
 
+    - name: Run Faker script in Node.js container
+      ansible.builtin.command:
+        cmd: docker exec -it cpd-express-backend-1 node fixture.js
+      args:
+        chdir: "{{ ansible_env.HOME }}/cpd-express"
+      become: yes
+
     - name: Allow SSH through the firewall (port 22)
       ufw:
         rule: allow

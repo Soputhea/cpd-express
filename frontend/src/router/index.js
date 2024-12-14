@@ -7,47 +7,57 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
-import { routes } from 'vue-router/auto-routes'
+import { routes } from "vue-router/auto-routes"
+import Dashboard from '@/pages/admin/dashboard.vue'
 
 
 // Customize routes to use different layouts
-const customRoutes = routes.map((route) => {
-  if (route.path === '/login' || route.path === '/register') {
-    // Use the DashboardLayout for authenticated pages
-    return {
-      ...route,
-      meta: {
-        layout: 'AuthLayout', // Assign the layout name
-        //requiresAuth: true,         // Mark as requiring authentication
-      },
-    };
-  }
+// const customRoutes = routes.map((route) => {
+//   if (route.path === '/login' || route.path === '/register') {
+//     // Use the DashboardLayout for authenticated pages
+//     return {
+//       ...route,
+//       meta: {
+//         layout: 'AuthLayout', // Assign the layout name
+//         //requiresAuth: true,         // Mark as requiring authentication
+//       },
+//     };
+//   }
 
-  if (route.path === '/' || route.path === '/createuser' || route.path === '/users') {
-    // Use DashboardLayout for the dashboard
-    return {
-      ...route,
-      meta: {
-        layout: 'DefaultLayout',
-        requiresAuth: true,  // Add authentication requirement
-      },
-    };
-  }
+//   if (route.path === '/' || route.path === '/createuser' || route.path === '/users') {
+//     // Use DashboardLayout for the dashboard
+//     return {
+//       ...route,
+//       meta: {
+//         layout: 'DefaultLayout',
+//         requiresAuth: true,  // Add authentication requirement
+//       },
+//     };
+//   }
 
-  // Return route unchanged for other pages
-  return route;
-});
+//   // Return route unchanged for other pages
+//   return route;
+// });
+
+// const customRoutes = [
+//   {
+//     path: '/admin/dashboard',
+//     name: 'dashboard',
+//     component: Dashboard,
+//     meta: { requiresAuth: true } // Only authenticated users can access this
+//   },
+// ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(customRoutes),
+  routes: setupLayouts(routes),
+  // routes: setupLayouts(customRoutes),
 })
 
-// Navigation guard for authentication
+
 // Guard to protect authenticated routes
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem('token'); // Check for token
-
   if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
     next({ path: '/login' }); // Redirect to login if not authenticated
   } else {

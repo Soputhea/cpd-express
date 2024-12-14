@@ -1,7 +1,5 @@
 # Project 2 : Scaffolding Small Express Server + Mongo
 
-Watch video: https://youtu.be/aTuuBpXfno8
-
 ### 1. Get DigitalOcean Token
 - Visit the [DigitalOcean website](https://cloud.digitalocean.com/) and log in.
 - Navigate to the API section to generate a **Personal Access Token**. Copy the token for later use.

@@ -271,6 +271,11 @@ const resetForm = () => {
 }
 </script>
 
+<route lang="yaml">
+  meta:
+    requiresAuth: true
+  </route>
+
 <style scoped>
 .v-text-field,
 v-select,

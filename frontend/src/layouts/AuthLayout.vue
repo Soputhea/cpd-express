@@ -2,15 +2,13 @@
 <template>
   <v-app>
     <v-container>
-        <router-view></router-view> <!-- The login or register page will be rendered here -->
+      <router-view></router-view>
     </v-container>
   </v-app>
 </template>
 
-<script setup>
-// No specific logic for this layout
+<script setup lang="ts">
+
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

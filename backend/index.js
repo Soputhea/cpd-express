@@ -40,9 +40,9 @@ app.use(cors());
 
 app.use(parser.json());
 app.use("/api/auth", authRoute);
-// app.use("/users", passport.authenticate("jwt", { session: false }), userRoute);
-app.use("/api/users", userRoute);
-app.use("/api/userDetail", userDetailRoute);
+app.use("/api/users", passport.authenticate("jwt", { session: false }), userRoute);
+app.use("/api/userDetail",  userDetailRoute);
+// app.use("/api/users", userRoute);
 // app.use("/books", createBookShema, bookRoute);
 app.use(errorHandle);
 
